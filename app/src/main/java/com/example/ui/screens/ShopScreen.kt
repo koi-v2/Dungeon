@@ -178,65 +178,63 @@ fun ShopScreen(
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Column(modifier = Modifier.padding(12.dp)) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                // Responsive hero summary: keep long names away from the gold balance.
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
                                     CharacterAvatar(
                                         avatarUri = activeHero.avatarUri,
                                         characterClass = activeHero.characterClass,
-                                        size = 46.dp
+                                        size = 44.dp
                                     )
-
                                     Spacer(modifier = Modifier.width(10.dp))
-
                                     Column(modifier = Modifier.weight(1f)) {
-                                        Row(verticalAlignment = Alignment.CenterVertically) {
-                                            Text(
-                                                text = activeHero.name,
-                                                fontWeight = FontWeight.Bold,
-                                                fontSize = 14.sp,
-                                                color = TextPrimary
-                                            )
-                                            Spacer(modifier = Modifier.width(6.dp))
-                                            Text(
-                                                text = "Lv.${activeHero.level} ${activeHero.characterClass.title}",
-                                                fontSize = 10.sp,
-                                                color = activeHero.characterClass.themeColor,
-                                                fontWeight = FontWeight.Bold
-                                            )
-                                        }
-
                                         Text(
-                                            text = "Senjata: ${activeHero.equippedWeaponIcon ?: "⚔️"} ${activeHero.equippedWeaponName ?: "Bawaan Dasar"}",
+                                            text = activeHero.name,
+                                            fontWeight = FontWeight.Bold,
+                                            fontSize = 14.sp,
+                                            color = TextPrimary
+                                        )
+                                        Text(
+                                            text = "Lv.${activeHero.level} • ${activeHero.characterClass.title}",
                                             fontSize = 11.sp,
-                                            color = GoldLight,
-                                            fontWeight = FontWeight.Medium
-                                        )
-
-                                        Text(
-                                            text = "Stok: 🧪 ${activeHero.potions} HP • 💧 ${activeHero.manaPotions} MP",
-                                            fontSize = 10.sp,
-                                            color = TextMuted
-                                        )
-                                    }
-
-                                    // Saldo Emas
-                                    Surface(
-                                        shape = RoundedCornerShape(8.dp),
-                                        color = GoldPrimary.copy(alpha = 0.2f),
-                                        border = androidx.compose.foundation.BorderStroke(1.dp, GoldPrimary.copy(alpha = 0.5f))
-                                    ) {
-                                        Text(
-                                            text = "💰 ${activeHero.gold} G",
-                                            fontSize = 13.sp,
-                                            fontWeight = FontWeight.ExtraBold,
-                                            color = GoldPrimary,
-                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                            color = activeHero.characterClass.themeColor,
+                                            fontWeight = FontWeight.Bold
                                         )
                                     }
                                 }
 
-                                Spacer(modifier = Modifier.height(10.dp))
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Surface(
+                                    shape = RoundedCornerShape(8.dp),
+                                    color = GoldPrimary.copy(alpha = 0.12f),
+                                    border = androidx.compose.foundation.BorderStroke(1.dp, GoldPrimary.copy(alpha = 0.4f)),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text(
+                                        text = "💰 ${activeHero.gold} G",
+                                        fontSize = 14.sp,
+                                        fontWeight = FontWeight.ExtraBold,
+                                        color = GoldPrimary,
+                                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
+                                    )
+                                }
 
-                                // Tombol Karakter Mikir Mau Beli Apa
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    text = "Senjata: ${activeHero.equippedWeaponIcon ?: "⚔️"} ${activeHero.equippedWeaponName ?: "Bawaan Dasar"}",
+                                    fontSize = 12.sp,
+                                    color = GoldLight,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = "Stok: 🧪 ${activeHero.potions} HP • 💧 ${activeHero.manaPotions} MP",
+                                    fontSize = 11.sp,
+                                    color = TextMuted
+                                )
+
+                                Spacer(modifier = Modifier.height(10.dp))
                                 Button(
                                     onClick = {
                                         viewModel.triggerAutonomousShopping(activeHero.id) {
@@ -267,7 +265,11 @@ fun ShopScreen(
                                     } else {
                                         Icon(Icons.Default.Psychology, contentDescription = null, modifier = Modifier.size(18.dp))
                                         Spacer(modifier = Modifier.width(6.dp))
-                                        Text("🧠 Suruh ${activeHero.name} Mikir Sendiri Mau Beli Apa", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                        Text(
+                                            text = "🧠 Suruh ${activeHero.name} Mikir Sendiri Mau Beli Apa",
+                                            fontSize = 12.sp,
+                                            fontWeight = FontWeight.Bold
+                                        )
                                     }
                                 }
                             }
