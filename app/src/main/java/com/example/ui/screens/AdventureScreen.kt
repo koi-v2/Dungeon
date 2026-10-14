@@ -292,7 +292,7 @@ fun DungeonZoneSelectionView(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(14.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         // Hero Adventure Quest Banner
         item {
