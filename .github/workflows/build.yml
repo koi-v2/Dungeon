@@ -41,6 +41,19 @@ jobs:
           test -f build.gradle.kts || test -f build.gradle
           test -f app/build.gradle.kts || test -f app/build.gradle
 
+      - name: Generate debug keystore
+        shell: bash
+        run: |
+          "$JAVA_HOME/bin/keytool" -genkeypair -v \
+            -keystore debug.keystore \
+            -storepass android \
+            -alias androiddebugkey \
+            -keypass android \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -dname "CN=Android Debug,O=Android,C=US"
+
       - name: Build Debug APK
         run: gradle --no-daemon --stacktrace :app:assembleDebug
 
