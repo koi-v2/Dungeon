@@ -9,13 +9,9 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: dungeon-apk-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   build:
-    name: Build Debug APK
+    name: Build Android APK
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
@@ -29,32 +25,33 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Check Gradle Wrapper
-        shell: bash
-        run: |
-          test -f gradlew || {
-            echo "::error::gradlew tidak ditemukan."
-            exit 1
-          }
-
-          test -f gradle/wrapper/gradle-wrapper.properties || {
-            echo "::error::Gradle Wrapper properties tidak ditemukan."
-            exit 1
-          }
-
-          chmod +x gradlew
-          cat gradle/wrapper/gradle-wrapper.properties
-
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Verify Gradle version
-        run: ./gradlew --version
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.3.1'
+
+      - name: Check project files
+        shell: bash
+        run: |
+          echo "Checking project configuration..."
+
+          test -f settings.gradle.kts || test -f settings.gradle
+          test -f build.gradle.kts || test -f build.gradle
+          test -f app/build.gradle.kts || test -f app/build.gradle
+
+          echo "Project files verified."
+
+      - name: Verify Gradle
+        run: gradle --version
 
       - name: Build Debug APK
-        run: ./gradlew --no-daemon --stacktrace :app:assembleDebug
+        run: gradle --no-daemon --stacktrace :app:assembleDebug
 
       - name: Upload APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: Dungeon-debug-APK
