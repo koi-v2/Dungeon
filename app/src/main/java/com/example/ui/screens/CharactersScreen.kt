@@ -138,14 +138,7 @@ fun CharactersScreen(
                 contentColor = ObsidianBg,
                 modifier = Modifier.testTag("add_character_fab")
             ) {
-                Row(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(Icons.Default.Add, contentDescription = "Tambah Karakter")
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text("Karakter Baru", fontWeight = FontWeight.Bold)
-                }
+                Icon(Icons.Default.Add, contentDescription = "Tambah Karakter")
             }
         },
         containerColor = ObsidianBg,
@@ -162,7 +155,7 @@ fun CharactersScreen(
                 border = androidx.compose.foundation.BorderStroke(1.dp, CardBorder),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
+                Column(modifier = Modifier.padding(12.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
@@ -269,7 +262,7 @@ fun CharactersScreen(
                         .fillMaxSize()
                         .padding(horizontal = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
-                    contentPadding = androidx.compose.foundation.layout.PaddingValues(top = 16.dp, bottom = 80.dp)
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(top = 10.dp, bottom = 72.dp)
                 ) {
                     items(filteredCharacters, key = { it.id }) { character ->
                         val characterGuild = guilds.find { it.id == character.guildId }
