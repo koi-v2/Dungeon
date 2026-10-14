@@ -151,7 +151,8 @@ fun MainContent(viewModel: RpgViewModel) {
                                 RpgTab.GUILDS -> "🛡️ Markas Besar Guild"
                             },
                             fontWeight = FontWeight.Bold,
-                            fontSize = 18.sp,
+                            fontSize = 16.sp,
+                            maxLines = 1,
                             color = GoldPrimary
                         )
                     },
@@ -164,7 +165,7 @@ fun MainContent(viewModel: RpgViewModel) {
             bottomBar = {
                 NavigationBar(
                     containerColor = DarkSurface,
-                    tonalElevation = 8.dp
+                    tonalElevation = 2.dp
                 ) {
                     RpgTab.entries.forEach { tab ->
                         val isSelected = currentTab == tab
@@ -175,7 +176,7 @@ fun MainContent(viewModel: RpgViewModel) {
                             label = {
                                 Text(
                                     text = tab.title,
-                                    fontSize = 10.sp,
+                                    fontSize = 9.sp,
                                     fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
                                     maxLines = 1
                                 )
