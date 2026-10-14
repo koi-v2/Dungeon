@@ -383,17 +383,10 @@ fun EventScreen(
                 contentColor = Color.White,
                 modifier = Modifier.testTag("event_fab_action")
             ) {
-                Row(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(Icons.Default.Add, contentDescription = "Tambah")
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text(
-                        text = if (currentSubTab == 0) "Summon Monster" else "Tempa Skill Baru",
-                        fontWeight = FontWeight.Bold
-                    )
-                }
+                Icon(
+                    Icons.Default.Add,
+                    contentDescription = if (currentSubTab == 0) "Summon Monster" else "Tempa Skill Baru"
+                )
             }
         },
         containerColor = ObsidianBg,
@@ -513,7 +506,7 @@ fun EventScreen(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(horizontal = 16.dp),
-                        verticalArrangement = Arrangement.spacedBy(14.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(filteredMonsters, key = { it.id }) { monster ->
                             EventMonsterCard(
