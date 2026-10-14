@@ -1,0 +1,6 @@
+{
+  "name": "Text RPG Guilds",
+  "description": "Game petualangan RPG berbasis teks dengan kustomisasi karakter (Warrior, Mage, Archer, Assassin), upload avatar, alokasi stat, bio karakter, dan sistem pembentukan guild kustom.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
