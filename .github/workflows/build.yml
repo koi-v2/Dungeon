@@ -1,0 +1,63 @@
+name: Build Dungeon APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dungeon-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build Debug APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Check Gradle Wrapper
+        shell: bash
+        run: |
+          test -f gradlew || {
+            echo "::error::gradlew tidak ditemukan."
+            exit 1
+          }
+
+          test -f gradle/wrapper/gradle-wrapper.properties || {
+            echo "::error::Gradle Wrapper properties tidak ditemukan."
+            exit 1
+          }
+
+          chmod +x gradlew
+          cat gradle/wrapper/gradle-wrapper.properties
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Verify Gradle version
+        run: ./gradlew --version
+
+      - name: Build Debug APK
+        run: ./gradlew --no-daemon --stacktrace :app:assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dungeon-debug-APK
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 7
