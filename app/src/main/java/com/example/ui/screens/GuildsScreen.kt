@@ -95,14 +95,7 @@ fun GuildsScreen(
                 contentColor = ObsidianBg,
                 modifier = Modifier.testTag("add_guild_fab")
             ) {
-                Row(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(Icons.Default.Add, contentDescription = "Buat Guild")
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text("Buat Guild Baru", fontWeight = FontWeight.Bold)
-                }
+                Icon(Icons.Default.Add, contentDescription = "Buat Guild")
             }
         },
         containerColor = ObsidianBg,
@@ -183,7 +176,7 @@ fun GuildsScreen(
                         .fillMaxSize()
                         .padding(horizontal = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
-                    contentPadding = androidx.compose.foundation.layout.PaddingValues(top = 12.dp, bottom = 80.dp)
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(top = 10.dp, bottom = 72.dp)
                 ) {
                     items(guilds, key = { it.id }) { guild ->
                         val guildMembers = characters.filter { it.guildId == guild.id }
@@ -269,7 +262,7 @@ fun GuildCard(
             .clickable { onClick() }
             .testTag("guild_card_${guild.id}")
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 GuildEmblemBadge(
                     emblemIcon = guild.emblemIcon,
