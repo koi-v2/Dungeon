@@ -114,14 +114,7 @@ fun ShopScreen(
                 contentColor = ObsidianBg,
                 modifier = Modifier.testTag("add_custom_weapon_fab")
             ) {
-                Row(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(Icons.Default.Add, contentDescription = "Tambah Senjata")
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text("Tempa Senjata Baru", fontWeight = FontWeight.Bold)
-                }
+                Icon(Icons.Default.Add, contentDescription = "Tambah Senjata")
             }
         },
         containerColor = ObsidianBg,
@@ -138,7 +131,7 @@ fun ShopScreen(
                 border = androidx.compose.foundation.BorderStroke(1.dp, CardBorder),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
+                Column(modifier = Modifier.padding(12.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
@@ -288,8 +281,8 @@ fun ShopScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(14.dp),
-                contentPadding = androidx.compose.foundation.layout.PaddingValues(top = 14.dp, bottom = 85.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(top = 10.dp, bottom = 72.dp)
             ) {
                 // Section 1: Fixed Potions (Permanen / Tidak Bisa Dihapus)
                 item {
