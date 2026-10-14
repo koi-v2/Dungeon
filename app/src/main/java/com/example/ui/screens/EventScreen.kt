@@ -726,35 +726,23 @@ fun EventMonsterCard(
             }
 
             // HP Bar
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text("Ketahanan Bos (HP):", fontSize = 11.sp, color = TextSecondary)
-                    Text(
-                        text = if (monster.isDefeated) "0 / ${monster.maxHp} HP" else "${monster.hp} / ${monster.maxHp} HP",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = HpColor
-                    )
-                }
-                StatProgressBar(
-                    current = if (monster.isDefeated) 0 else monster.hp,
-                    max = monster.maxHp,
-                    fillColor = if (monster.isDefeated) CardBorder else HpColor,
-                    height = 8.dp
-                )
-            }
+            StatProgressBar(
+                label = "Ketahanan Bos (HP)",
+                currentValue = if (monster.isDefeated) 0 else monster.hp,
+                maxValue = monster.maxHp,
+                color = if (monster.isDefeated) CardBorder else HpColor,
+                modifier = Modifier.fillMaxWidth(),
+                unit = "HP"
+            )
 
             // Stats chips
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                StatChip(label = "ATK", value = monster.atk.toString(), color = AtkColor, modifier = Modifier.weight(1f))
-                StatChip(label = "DEF", value = monster.def.toString(), color = DefColor, modifier = Modifier.weight(1f))
-                StatChip(label = "SPD", value = monster.spd.toString(), color = SpdColor, modifier = Modifier.weight(1f))
+                StatChip(label = "ATK", value = monster.atk.toString(), color = AtkColor, icon = "⚔️", modifier = Modifier.weight(1f))
+                StatChip(label = "DEF", value = monster.def.toString(), color = DefColor, icon = "🛡️", modifier = Modifier.weight(1f))
+                StatChip(label = "SPD", value = monster.spd.toString(), color = SpdColor, icon = "⚡", modifier = Modifier.weight(1f))
             }
 
             // Skill Bos
